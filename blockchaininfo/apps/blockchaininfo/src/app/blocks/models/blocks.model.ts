@@ -26,3 +26,8 @@ export interface TransactionsList {
   walletAddress: string;
   outputTotal: string; // in BTC
 }
+
+export interface MovieDialogBoxOptions {
+  block: Block;
+  display?: boolean;
+}
