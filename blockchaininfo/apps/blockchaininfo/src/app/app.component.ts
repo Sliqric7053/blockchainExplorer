@@ -1,13 +1,19 @@
-import { Component } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Message } from '@blockchaininfo/api-interfaces';
+import { Component, OnInit } from '@angular/core';
+import { BlocksService } from './blocks/blocks.service';
+import { Observable } from 'rxjs';
+import { Block } from './blocks/models/blocks.model';
 
 @Component({
   selector: 'blockchaininfo-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
-  hello$ = this.http.get<Message>('/api/hello');
-  constructor(private http: HttpClient) {}
+export class AppComponent implements OnInit {
+  blocks$: Observable<Block[]>;
+
+  constructor(private blockService: BlocksService) {}
+
+  ngOnInit() {
+    this.blocks$ = this.blockService.getLatestBlocks();
+  }
 }

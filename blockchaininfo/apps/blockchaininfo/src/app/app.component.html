@@ -1,8 +1,8 @@
-<div style="text-align:center">
-  <h1>Welcome to blockchaininfo!</h1>
-  <img
-    width="450"
-    src="https://raw.githubusercontent.com/nrwl/nx/master/nx-logo.png"
-  />
+<mat-toolbar color="primary">
+  <mat-toolbar-row class="fill-remaining-space">
+    <span>Blockchain Explorer</span>
+  </mat-toolbar-row>
+</mat-toolbar>
+<div class="main-content">
+  <router-outlet></router-outlet>
 </div>
-<div>Message: {{ hello$ | async | json }}</div>
