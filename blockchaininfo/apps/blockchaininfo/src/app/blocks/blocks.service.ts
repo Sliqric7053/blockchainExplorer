@@ -24,13 +24,13 @@ export class BlocksService {
     );
   }
 
-  public getBlockDetails(block: Block): Observable<Block> {
+  public getBlockDetails(hash: string): Observable<Block> {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
       })
     };
-    return this.http.post<Block>(this.blockBaseUrl, block, httpOptions).pipe(
+    return this.http.post<Block>(this.blockBaseUrl, hash, httpOptions).pipe(
       tap(_ => console.log('getBlockDetails')),
       catchError(this.handleError)
     );
