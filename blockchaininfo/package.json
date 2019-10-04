@@ -5,6 +5,7 @@
   "scripts": {
     "ng": "ng",
     "nx": "nx",
+    "fullstack": "ng serve blockchaininfo & ng serve api",
     "start": "ng serve",
     "build": "ng build",
     "test": "ng test",
