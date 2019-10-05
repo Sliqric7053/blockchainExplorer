@@ -8,14 +8,13 @@ export class BlocksServiceService {
   latestBlocksUrl = 'https://blockchain.info/blocks?format=json';
 
   getLatestBlocks() {
-    return this.http.get('https://blockchain.info/blocks?format=json').pipe(
-      tap(_ => console.log('date')),
-      map(response => response.data)
-    );
+    return this.http
+      .get(this.latestBlocksUrl)
+      .pipe(map(response => response.data));
   }
 
   getBlockDetails(hash: string) {
-    const blockDetailUrl = `https://blockchain.info/rawblock/${hash}?format=jsonblockchain.info/blocks?format=json`;
+    const blockDetailUrl = `https://blockchain.info/rawblock/${hash}?format=json`;
 
     try {
       return this.http.get(blockDetailUrl).pipe(map(response => response.data));
