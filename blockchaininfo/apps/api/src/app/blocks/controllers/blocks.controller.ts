@@ -1,4 +1,4 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, Param } from '@nestjs/common';
 import { BlocksServiceService } from '../services/blocks-service/blocks-service.service';
 
 @Controller('blocks')
@@ -12,7 +12,7 @@ export class BlocksController {
   }
 
   @Get(':hash')
-  async getBlockDetails(hash: string) {
+  async getBlockDetails(@Param('hash') hash: string) {
     const details = await this.blockService.getBlockDetails(hash).toPromise();
     return details;
   }
