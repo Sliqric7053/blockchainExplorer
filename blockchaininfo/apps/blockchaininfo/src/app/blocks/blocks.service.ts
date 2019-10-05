@@ -4,7 +4,7 @@ import {
   HttpClient,
   HttpHeaders
 } from '@angular/common/http';
-import { throwError, Observable } from 'rxjs';
+import { throwError, Observable, BehaviorSubject } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 import { Block, GetBlocksResults } from './models/blocks.model';
 
@@ -13,6 +13,7 @@ import { Block, GetBlocksResults } from './models/blocks.model';
 })
 export class BlocksService {
   blockBaseUrl = 'api/blocks'; // URL to web api
+  private hash$ = new BehaviorSubject<string>('');
 
   constructor(private http: HttpClient) {}
 
@@ -25,15 +26,18 @@ export class BlocksService {
   }
 
   public getBlockDetails(hash: string): Observable<Block> {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json'
-      })
-    };
-    return this.http.post<Block>(this.blockBaseUrl, hash, httpOptions).pipe(
+    return this.http.get<Block>(`${this.blockBaseUrl}/${hash}`).pipe(
       tap(_ => console.log('getBlockDetails')),
       catchError(this.handleError)
     );
+  }
+
+  public setHash(hash: string) {
+    this.hash$.next(hash);
+  }
+
+  public getHash() {
+    return this.hash$.value;
   }
 
   private handleError(error: HttpErrorResponse) {
