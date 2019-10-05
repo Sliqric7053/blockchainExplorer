@@ -14,17 +14,12 @@ export class GridComponent implements OnInit {
   @Output() action: EventEmitter<string> = new EventEmitter();
   displayedColumns: string[] = ['Block hash', 'Block time', 'Block height'];
 
-  constructor(
-    public dialog: MatDialog,
-    private readonly blockService: BlocksService
-  ) {}
+  constructor(public dialog: MatDialog, private blockService: BlocksService) {}
 
   ngOnInit() {}
 
   openDialog(hash: string) {
-    console.log('TCL: GridComponent -> openDialog -> hash', hash);
-    // TODO: pass this to dialog component for display
-    // this.blockService.getBlockDetails(hash);
+    this.blockService.setHash(hash);
 
     this.dialog.open(DialogComponent, {
       disableClose: false,
