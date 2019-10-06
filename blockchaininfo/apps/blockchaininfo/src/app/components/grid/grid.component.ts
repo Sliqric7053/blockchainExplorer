@@ -1,8 +1,8 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { Block, MovieDialogBoxOptions } from '../../blocks/models/blocks.model';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogComponent } from '../dialog/dialog.component';
 import { BlocksService } from '../../blocks/blocks.service';
+import { Block } from '@blockchaininfo/api-interfaces';
 
 @Component({
   selector: 'blockchaininfo-grid',
@@ -13,6 +13,7 @@ export class GridComponent implements OnInit {
   @Input() dataSource: Block[];
   @Output() action: EventEmitter<string> = new EventEmitter();
   displayedColumns: string[] = ['Block hash', 'Block time', 'Block height'];
+  now = new Date().getTime();
 
   constructor(public dialog: MatDialog, private blockService: BlocksService) {}
 
