@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { BlocksService } from './blocks/blocks.service';
 import { Observable } from 'rxjs';
-import { Block } from './blocks/models/blocks.model';
+import { Block } from '@blockchaininfo/api-interfaces';
 
 @Component({
   selector: 'blockchaininfo-root',

@@ -6,7 +6,11 @@ import {
 } from '@angular/common/http';
 import { throwError, Observable, BehaviorSubject } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
-import { Block, GetBlocksResults } from './models/blocks.model';
+import {
+  Block,
+  GetBlocksResults,
+  BlockDetailsResults
+} from '@blockchaininfo/api-interfaces';
 
 @Injectable({
   providedIn: 'root'
@@ -19,17 +23,16 @@ export class BlocksService {
 
   public getLatestBlocks(): Observable<Block[]> {
     return this.http.get<GetBlocksResults>(this.blockBaseUrl).pipe(
-      tap(_ => console.log('getLatestBlocks')),
       map((results: GetBlocksResults) => results.blocks),
       catchError(this.handleError)
     );
   }
 
-  public getBlockDetails(hash: string): Observable<Block> {
-    return this.http.get<Block>(`${this.blockBaseUrl}/${hash}`).pipe(
-      tap(_ => console.log('getBlockDetails')),
-      catchError(this.handleError)
-    );
+  public getBlockDetails(hash: string): Observable<BlockDetailsResults> {
+    const url = `${this.blockBaseUrl}/${hash}`;
+    return this.http
+      .get<BlockDetailsResults>(url)
+      .pipe(catchError(this.handleError));
   }
 
   public setHash(hash: string) {
