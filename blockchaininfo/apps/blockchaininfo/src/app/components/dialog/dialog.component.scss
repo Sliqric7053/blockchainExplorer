@@ -1,8 +1,22 @@
+table {
+  width: 100%;
+}
+
+.mat-form-field {
+  font-size: 14px;
+  width: 100%;
+}
+
+input {
+  color: rgb(150, 105, 150);
+}
+
 :host {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
 }
+
 .mat-dialog-content {
   min-width: 300px;
 }
