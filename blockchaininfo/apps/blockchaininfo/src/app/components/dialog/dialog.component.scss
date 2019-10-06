@@ -6,3 +6,23 @@
 .mat-dialog-content {
   min-width: 300px;
 }
+
+.spinner-margin {
+  margin: 0 10px;
+}
+
+.spinner-section {
+  display: flex;
+  justify-content: center;
+  height: 30em;
+  align-items: center;
+}
+
+.mat-dialog-actions {
+  justify-content: flex-end;
+}
+
+button:hover {
+  background: #777;
+  cursor: pointer;
+}
