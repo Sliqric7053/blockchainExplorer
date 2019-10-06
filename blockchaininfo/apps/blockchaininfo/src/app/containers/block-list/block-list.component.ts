@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable, BehaviorSubject } from 'rxjs';
-import { Block } from '../../blocks/models/blocks.model';
 import { BlocksService } from '../../blocks/blocks.service';
 import { MatDialog } from '@angular/material/dialog';
 import { switchMap, tap } from 'rxjs/operators';
+import { Block } from '@blockchaininfo/api-interfaces';
 
 @Component({
   selector: 'blockchaininfo-block-list',
@@ -16,13 +16,12 @@ export class BlockListComponent implements OnInit {
 
   constructor(
     private readonly dialog: MatDialog,
-    private readonly blockService: BlocksService
+    private blockService: BlocksService
   ) {}
 
   ngOnInit() {
     this.dataSource$ = this.refresh$.pipe(
-      switchMap(_ => this.blockService.getLatestBlocks()),
-      tap(console.log)
+      switchMap(_ => this.blockService.getLatestBlocks())
     );
   }
 }
