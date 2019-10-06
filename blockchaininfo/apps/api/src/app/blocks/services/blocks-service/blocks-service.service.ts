@@ -1,5 +1,7 @@
 import { Injectable, HttpService, NotFoundException } from '@nestjs/common';
 import { map, tap } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { Block } from '@blockchaininfo/api-interfaces';
 
 @Injectable()
 export class BlocksServiceService {
@@ -7,7 +9,7 @@ export class BlocksServiceService {
 
   latestBlocksUrl = 'https://blockchain.info/blocks?format=json';
 
-  getLatestBlocks() {
+  getLatestBlocks(): Observable<Block[]> {
     return this.http
       .get(this.latestBlocksUrl)
       .pipe(map(response => response.data));
