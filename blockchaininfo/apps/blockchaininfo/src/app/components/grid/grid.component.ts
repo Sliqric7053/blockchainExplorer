@@ -1,11 +1,9 @@
 import {
   Component,
   OnInit,
-  Input,
   Output,
   EventEmitter,
-  ViewChild,
-  AfterViewInit
+  ViewChild
 } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogComponent } from '../dialog/dialog.component';
@@ -14,14 +12,13 @@ import { Block } from '@blockchaininfo/api-interfaces';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import { Observable } from 'rxjs';
 
 @Component({
   selector: 'blockchaininfo-grid',
   templateUrl: './grid.component.html',
   styleUrls: ['./grid.component.scss']
 })
-export class GridComponent implements OnInit, AfterViewInit {
+export class GridComponent implements OnInit {
   dataSource: MatTableDataSource<Block>;
   dataSourceLength: number;
   @Output() action: EventEmitter<string> = new EventEmitter();
@@ -33,9 +30,7 @@ export class GridComponent implements OnInit, AfterViewInit {
 
   constructor(public dialog: MatDialog, private blockService: BlocksService) {}
 
-  ngOnInit() {}
-
-  ngAfterViewInit() {
+  ngOnInit() {
     this.blockService.getLatestBlocks().subscribe((blocks: Block[]) => {
       this.dataSource = new MatTableDataSource<Block>(blocks);
       this.dataSourceLength = blocks.length;
