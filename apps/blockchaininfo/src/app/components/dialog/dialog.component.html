@@ -1,0 +1,37 @@
+<div *ngIf="block">
+  <h1>Block details</h1>
+  <p><b>Previous block:</b> {{ block.details.prev_block }}</p>
+  <p><b>Block index:</b> {{ block.details.block_index }}</p>
+  <p><b>Size:</b> {{ block.details.size }}</p>
+  <h1>List of transactions</h1>
+  <h3>
+    Output wallet addresses:
+  </h3>
+  <ul *ngFor="let transaction of block.details.tx.slice(1, 10)">
+    <li *ngIf="transaction.out[0].addr">{{ transaction.out[0].addr }}</li>
+  </ul>
+  <h3>
+    Input wallet addresses:
+  </h3>
+  <ul *ngFor="let transaction of block.details.tx.slice(1, 10); let tot">
+    <li *ngIf="transaction.inputs[0].prev">
+      {{ transaction.inputs[0].prev.addr }}
+    </li>
+  </ul>
+  <br />
+  <h2>
+    Output total in BTC:
+    {{ blogTotal }}
+  </h2>
+</div>
+<button mat-button (click)="closeDialog()" mat-flat-button color="primary">
+  Close
+</button>
+<section class="spinner-section" *ngIf="!block">
+  <mat-progress-spinner
+    class="spinner-margin"
+    color="primary"
+    mode="indeterminate"
+  >
+  </mat-progress-spinner>
+</section>

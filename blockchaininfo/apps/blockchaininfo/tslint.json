@@ -1,7 +1,0 @@
-{
-  "extends": "../../tslint.json",
-  "rules": {
-    "directive-selector": [true, "attribute", "blockchaininfo", "camelCase"],
-    "component-selector": [true, "element", "blockchaininfo", "kebab-case"]
-  }
-}
