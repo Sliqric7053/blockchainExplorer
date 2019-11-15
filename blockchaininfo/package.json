@@ -6,8 +6,8 @@
     "ng": "ng",
     "nx": "nx",
     "fullstack": "ng serve blockchaininfo & ng serve api",
-    "start": "ng serve",
-    "build": "ng build",
+    "start": "node /usr/src/app/main.js",
+    "build": "ng build --prod --project=blockchaininfo && ng build --prod --project=api",
     "test": "ng test",
     "lint": "nx workspace-lint && ng lint",
     "e2e": "ng e2e",
@@ -26,7 +26,15 @@
     "update:check": "ng update",
     "workspace-schematic": "nx workspace-schematic",
     "dep-graph": "nx dep-graph",
-    "help": "nx help"
+    "help": "nx help",
+    "clear-web-container": "docker stop web && docker rm web",
+    "clear-api-containers": "docker stop api0 && docker rm api0 && docker stop api1 && docker rm api1",
+    "clear-web-image": "docker rmi nxproduction_web",
+    "clear-api-image": "docker rmi nxproduction_api0 && docker rmi nxproduction_api1",
+    "clear-docker": "npm run clear-web-container && npm run clear-web-image && npm run clear-api-containers && npm run clear-api-image",
+    "build-prod": "ng build --prod --project=api && ng build --prod --project=blockchaininfo",
+    "serve-prod-run": "docker-compose up",
+    "docker:fs": "docker exec -t -i <your-mycontainer-id> /bin/bash"
   },
   "private": true,
   "dependencies": {
